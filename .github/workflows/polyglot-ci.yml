@@ -1,0 +1,73 @@
+name: Modern-SE-Algorithms
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test-algorithms:
+    name: Test on ${{ matrix.language }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false 
+      matrix:
+        language: [ 'python', 'typescript', 'go', 'rust', 'java', 'csharp', 'cpp' ]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      
+      - name: Setup C++ (GCC Compiler)
+        if: matrix.language == 'cpp'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y g++ build-essential
+
+      - name: Setup Node.js (TypeScript)
+        if: matrix.language == 'typescript'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Python
+        if: matrix.language == 'python'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Setup Go
+        if: matrix.language == 'go'
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+
+      - name: Setup Rust
+        if: matrix.language == 'rust'
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          profile: minimal
+
+      - name: Setup Java
+        if: matrix.language == 'java'
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Setup .NET (C#)
+        if: matrix.language == 'csharp'
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      
+      - name: Execute Tests via Shell Script
+        run: |
+          echo "Executing tests for ${{ matrix.language }}..."
+          chmod +x ./run_tests.sh
+          ./run_tests.sh ${{ matrix.language }}
