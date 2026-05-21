@@ -1,7 +1,7 @@
 # ⭕ Consistent Hashing
 
 **Time Complexity (Lookup):** $O(\log N)$  
-**Space Complexity:** $O(V \times S)$ *(Virtual Nodes $\times$ Servers)*  
+**Space Complexity:** O(V \times S) *(Virtual Nodes \times,Servers)*  
 
 ## 🚨 The Problem
 If you scale a database (like Redis or MongoDB) to 10 servers using standard modulo math (`hash(user_id) % 10`), your system works perfectly—until Server 4 crashes. The total server count becomes 9. Suddenly, `hash(user_id) % 9` changes the mathematical location for *every single user*. Your system attempts to migrate terabytes of data across the network instantly, causing a catastrophic cascading failure.
