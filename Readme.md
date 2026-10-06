@@ -13,6 +13,11 @@
 
 ---
 
+## 🌍 Interactive Website
+An animated, professional UI website is now generated directly from this repository content and deployed via GitHub Pages.
+
+**Live URL:** `https://iprsnmsra.github.io/awesome-Modern-SE-Algorithms/`
+
 ## ⚡ The Architecture
 This repository doesn't just store code; it mathematically proves it works. Every push triggers a parallel CI/CD matrix that tests all 5 languages simultaneously.
 

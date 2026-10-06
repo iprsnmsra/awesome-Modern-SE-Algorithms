@@ -1,0 +1,137 @@
+:root {
+  --bg: #080b14;
+  --card: rgba(17, 24, 39, 0.82);
+  --line: rgba(148, 163, 184, 0.2);
+  --text: #e5e7eb;
+  --subtext: #94a3b8;
+  --primary: #38bdf8;
+  --accent: #a78bfa;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background: radial-gradient(circle at 10% -5%, rgba(56, 189, 248, 0.22), transparent 30%),
+    radial-gradient(circle at 90% 0%, rgba(167, 139, 250, 0.2), transparent 30%), var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+.hero, .layout, footer { width: min(1400px, 94vw); margin: 0 auto; }
+.hero {
+  padding: 2.4rem 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: end;
+}
+.chip {
+  display: inline-block;
+  padding: .35rem .65rem;
+  border-radius: 999px;
+  font-size: .76rem;
+  color: #dbeafe;
+  letter-spacing: .04rem;
+  border: 1px solid rgba(125, 211, 252, .35);
+  background: rgba(30, 64, 175, .25);
+}
+h1 { margin: .6rem 0; font-size: clamp(1.6rem, 2.5vw, 2.8rem); }
+.subtitle { color: var(--subtext); margin: 0; }
+#searchInput {
+  width: min(420px, 100%);
+  padding: .95rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: .8rem;
+  background: rgba(15, 23, 42, .85);
+  color: var(--text);
+}
+.layout {
+  display: grid;
+  grid-template-columns: 240px 340px minmax(0, 1fr);
+  gap: 1rem;
+  padding-bottom: 1.3rem;
+}
+aside, .algorithm-list, .details {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  padding: 1rem;
+  backdrop-filter: blur(10px);
+}
+.category-list, .algorithm-list {
+  display: grid;
+  gap: .65rem;
+  max-height: 70vh;
+  overflow: auto;
+}
+button {
+  border: 1px solid var(--line);
+  border-radius: .7rem;
+  background: rgba(15, 23, 42, .45);
+  color: var(--text);
+  padding: .8rem;
+  text-align: left;
+  cursor: pointer;
+  transition: transform .18s ease, border-color .22s ease, background .22s ease;
+}
+button:hover { transform: translateY(-2px); border-color: rgba(56, 189, 248, .5); }
+button.active { border-color: var(--primary); background: rgba(8, 47, 73, .5); }
+.algorithm-card p, .panel-subtle { margin: .35rem 0 0; color: var(--subtext); font-size: .88rem; }
+.details { overflow: auto; max-height: 70vh; }
+.panel-placeholder { color: var(--subtext); margin-top: 2rem; text-align: center; }
+.explanation {
+  border: 1px solid var(--line);
+  border-radius: .8rem;
+  padding: .9rem;
+  line-height: 1.6;
+  background: rgba(15, 23, 42, .45);
+}
+pre {
+  margin: .8rem 0;
+  border-radius: .8rem;
+  border: 1px solid rgba(56, 189, 248, .35);
+  background: #020617;
+  color: #dbeafe;
+  padding: .9rem;
+  overflow-x: auto;
+}
+.code-tab-bar { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+.code-tab-bar button { font-size: .78rem; padding: .5rem .75rem; }
+footer { padding: .7rem 0 1.8rem; color: #cbd5e1; text-align: center; font-size: .9rem; }
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, rgba(2, 6, 23, .96), rgba(8, 11, 20, .96));
+  transition: opacity .6s ease, visibility .6s ease;
+}
+.intro.done { opacity: 0; visibility: hidden; }
+.intro-card {
+  width: min(560px, 92vw);
+  background: rgba(15, 23, 42, .75);
+  border: 1px solid rgba(148, 163, 184, .3);
+  border-radius: 1rem;
+  padding: 1.4rem;
+  animation: rise .8s ease;
+}
+.intro-tag { letter-spacing: .08rem; color: #7dd3fc; font-size: .76rem; }
+.intro-progress {
+  height: .5rem;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, .25);
+  overflow: hidden;
+}
+.intro-progress span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  transition: width .3s ease;
+}
+@keyframes rise { from { transform: translateY(18px); opacity: .2; } to { transform: translateY(0); opacity: 1; } }
+@media (max-width: 1180px) {
+  .layout { grid-template-columns: 1fr; }
+  .category-list, .algorithm-list, .details { max-height: none; }
+  .hero { flex-direction: column; align-items: stretch; }
+}
